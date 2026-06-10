@@ -65,10 +65,67 @@ export function AppLayout({ children }: { children: ReactNode }) {
             <Button variant="ghost" size="icon" onClick={toggle} aria-label="Toggle theme">
               {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
             </Button>
-            <div className="ml-2 flex h-9 w-9 items-center justify-center rounded-full gradient-brand text-primary-foreground text-xs font-semibold">
-              AK
-            </div>
-          </div>
+            <Popover>
+              <PopoverTrigger asChild>
+                <button
+                  aria-label="Open profile menu"
+                  className="ml-2 flex h-9 w-9 items-center justify-center rounded-full gradient-brand text-primary-foreground text-xs font-semibold ring-offset-background transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  {currentMember.initials}
+                </button>
+              </PopoverTrigger>
+              <PopoverContent align="end" className="w-80 p-0 overflow-hidden">
+                <div className="p-4 gradient-brand text-primary-foreground">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/15 backdrop-blur text-sm font-semibold">
+                      {currentMember.initials}
+                    </div>
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1.5">
+                        <p className="font-semibold truncate">{currentMember.name}</p>
+                        <BadgeCheck className="h-4 w-4 shrink-0" />
+                      </div>
+                      <p className="text-xs opacity-90 truncate">{currentMember.role}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4 space-y-2 text-sm">
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <MailIcon className="h-3.5 w-3.5" />
+                    <span className="truncate">{currentMember.email}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <Building2 className="h-3.5 w-3.5" />
+                    <span className="truncate">{currentMember.team}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <Sparkles className="h-3.5 w-3.5 text-coral" />
+                    <span>{currentMember.plan} plan</span>
+                  </div>
+                </div>
+                <div className="border-t border-border p-3 bg-muted/40">
+                  <div className="flex items-start gap-2 text-xs text-muted-foreground leading-relaxed">
+                    <ShieldAlert className="h-3.5 w-3.5 mt-0.5 text-coral shrink-0" />
+                    <p>
+                      <span className="font-semibold text-foreground">Responsible AI:</span> CAPACITI AI
+                      assists — it does not decide. Outputs may be inaccurate or biased. Review before
+                      acting, never share confidential data, and human approval is required for
+                      sensitive actions.{" "}
+                      <Link to="/responsible-ai" className="text-coral hover:underline">
+                        Read full disclaimer
+                      </Link>
+                      .
+                    </p>
+                  </div>
+                </div>
+                <div className="border-t border-border p-2">
+                  <button className="w-full flex items-center gap-2 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition">
+                    <LogOut className="h-4 w-4" />
+                    Sign out
+                  </button>
+                </div>
+              </PopoverContent>
+            </Popover>
         </header>
 
         <main className="flex-1 min-w-0">{children}</main>
