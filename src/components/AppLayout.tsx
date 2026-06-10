@@ -1,14 +1,26 @@
 import type { ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Menu, Moon, Sun, Bell, X } from "lucide-react";
+import { Menu, Moon, Sun, Bell, X, Mail as MailIcon, Building2, BadgeCheck, LogOut, ShieldAlert } from "lucide-react";
 import { useState } from "react";
 import { AppSidebar } from "./AppSidebar";
 import { Logo } from "./Logo";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/lib/theme";
 import {
+  Popover, PopoverContent, PopoverTrigger,
+} from "@/components/ui/popover";
+import {
   LayoutDashboard, Mail, Calendar, ListChecks, Search, Bot, Users, Sparkles, ShieldCheck,
 } from "lucide-react";
+
+const currentMember = {
+  initials: "AK",
+  name: "Amara Khumalo",
+  role: "Senior Product Manager",
+  email: "amara.khumalo@capaciti.org.za",
+  team: "CAPACITI · Workflow AI",
+  plan: "Enterprise",
+};
 
 const mobileNav = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard },
